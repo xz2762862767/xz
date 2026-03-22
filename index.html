@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>精品软件库 - 最全软件资源平台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+body{background:#f5f7fa;color:#333;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:15px}
+.header{background:linear-gradient(135deg,#4e65ff,#8c52ff);color:#fff;padding:20px;border-radius:16px;margin-bottom:20px}
+.header h1{font-size:24px;margin-bottom:6px}
+.header p{opacity:.9}
+.cate{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.cate button{padding:8px 14px;border:none;border-radius:12px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}
+.cate button.active{background:#4e65ff;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.05);transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.card-img{width:100%;height:140px;object-fit:cover;background:#f0f0f0}
+.card-body{padding:14px}
+.card-title{font-size:16px;font-weight:600;margin-bottom:6px}
+.card-desc{font-size:13px;color:#666;margin-bottom:10px;height:40px;overflow:hidden}
+.card-tags{display:flex;gap:6px;margin-bottom:10px}
+.tag{font-size:11px;background:#f0f5ff;color:#4e65ff;padding:2px 8px;border-radius:999px}
+.tag.premium{background:#fff2e8;color:#ff7d00}
+.card-footer{display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:700;color:#ff4d4f}
+.free{color:#00b42a}
+.btn{padding:6px 12px;border:none;border-radius:10px;font-size:13px;cursor:pointer}
+.btn-primary{background:#4e65ff;color:#fff}
+.btn-free{background:#e6f7e9;color:#00b42a}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
+.modal.show{display:flex}
+.modal-box{background:#fff;border-radius:20px;max-width:500px;width:100%;max-height:90vh;overflow:auto}
+.modal-head{padding:20px;border-bottom:1px solid #eee}
+.modal-body{padding:20px}
+.modal-foot{padding:16px 20px;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end}
+.pay-item{padding:12px;border:1px solid #eee;border-radius:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.pay-item input{width:18px;height:18px}
+.pay-item.active{border-color:#4e65ff;background:#f8f9ff}
+.btn-pay{background:#ff4d4f;color:#fff;padding:10px 18px;border-radius:12px;width:100%;border:none;margin-top:10px;font-weight:600}
+@media(max-width:768px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="header">
+<h1>精品软件库</h1>
+<p>全网最全、安全、高速下载平台</p>
+</div>
+
+<div class="cate">
+<button class="active">全部</button>
+<button>系统工具</button>
+<button>设计创意</button>
+<button>办公学习</button>
+<button>影音娱乐</button>
+<button>付费精品</button>
+</div>
+
+<div class="grid" id="appList">
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=1">
+<div class="card-body">
+<div class="card-title">Windows 优化大师</div>
+<div class="card-desc">系统清理、加速、修复一站式工具</div>
+<div class="card-tags">
+<span class="tag">系统工具</span>
+<span class="tag free">免费</span>
+</div>
+<div class="card-footer">
+<span class="free">免费下载</span>
+<button class="btn btn-free" onclick="showDetail(0)">立即下载</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=2">
+<div class="card-body">
+<div class="card-title">AI 智能修图专业版</div>
+<div class="card-desc">AI一键抠图、修复、高清渲染、批量处理</div>
+<div class="card-tags">
+<span class="tag">设计创意</span>
+<span class="tag premium">付费精品</span>
+</div>
+<div class="card-footer">
+<span class="price">¥39.00</span>
+<button class="btn btn-primary" onclick="showPay(1)">立即购买</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=3">
+<div class="card-body">
+<div class="card-title">办公文档全能套件</div>
+<div class="card-desc">PDF编辑、格式转换、OCR识别、文档加密</div>
+<div class="card-tags">
+<span class="tag">办公学习</span>
+<span class="tag premium">付费</span>
+</div>
+<div class="card-footer">
+<span class="price">¥29.00</span>
+<button class="btn btn-primary" onclick="showPay(2)">立即购买</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=4">
+<div class="card-body">
+<div class="card-title">4K影音播放器 Pro</div>
+<div class="card-desc">支持全格式解码、倍速播放、无广告</div>
+<div class="card-tags">
+<span class="tag">影音娱乐</span>
+<span class="tag free">免费</span>
+</div>
+<div class="card-footer">
+<span class="free">免费下载</span>
+<button class="btn btn-free" onclick="showDetail(3)">立即下载</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=5">
+<div class="card-body">
+<div class="card-title">数据恢复精灵专业版</div>
+<div class="card-desc">深度恢复误删文件、硬盘、U盘数据</div>
+<div class="card-tags">
+<span class="tag">系统工具</span>
+<span class="tag premium">付费</span>
+</div>
+<div class="card-footer">
+<span class="price">¥59.00</span>
+<button class="btn btn-primary" onclick="showPay(4)">立即购买</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img class="card-img" src="https://picsum.photos/400/200?random=6">
+<div class="card-body">
+<div class="card-title">视频剪辑工具箱</div>
+<div class="card-desc">剪辑、压缩、转码、加水印、录屏</div>
+<div class="card-tags">
+<span class="tag">影音娱乐</span>
+<span class="tag free">免费</span>
+</div>
+<div class="card-footer">
+<span class="free">免费下载</span>
+<button class="btn btn-free" onclick="showDetail(5)">立即下载</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal" id="detailModal">
+<div class="modal-box">
+<div class="modal-head"><h3>软件详情</h3></div>
+<div class="modal-body">
+<p>软件名称：<span id="dName"></span></p><br>
+<p>软件介绍：高速安全下载，无捆绑、无广告。</p><br>
+<button class="btn-primary btn" style="width:100%" onclick="doDownload()">确认下载</button>
+</div>
+<div class="modal-foot"><button onclick="closeModal()">关闭</button></div>
+</div>
+</div>
+
+<div class="modal" id="payModal">
+<div class="modal-box">
+<div class="modal-head"><h3>支付购买</h3></div>
+<div class="modal-body">
+<p>软件：<span id="pName"></span></p><br>
+<p>价格：<span id="pPrice" style="color:#ff4d4f;font-weight:bold"></span></p><br>
+<div class="pay-item active"><input type="radio" name="pay" checked><span>微信支付</span></div>
+<div class="pay-item"><input type="radio" name="pay"><span>支付宝支付</span></div>
+<button class="btn-pay" onclick="doPay()">确认支付</button>
+</div>
+<div class="modal-foot"><button onclick="closeModal()">取消</button></div>
+</div>
+</div>
+
+<script>
+const apps = [
+{name:"Windows 优化大师",price:0},
+{name:"AI 智能修图专业版",price:39},
+{name:"办公文档全能套件",price:29},
+{name:"4K影音播放器 Pro",price:0},
+{name:"数据恢复精灵专业版",price:59},
+{name:"视频剪辑工具箱",price:0}
+]
+function closeModal(){
+document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'))
+}
+function showDetail(i){
+document.getElementById('dName').innerText = apps[i].name
+document.getElementById('detailModal').classList.add('show')
+}
+function showPay(i){
+document.getElementById('pName').innerText = apps[i].name
+document.getElementById('pPrice').innerText = '¥'+apps[i].price+'.00'
+document.getElementById('payModal').classList.add('show')
+}
+function doDownload(){
+alert('开始免费下载…')
+closeModal()
+}
+function doPay(){
+alert('支付成功！获取下载链接')
+closeModal()
+}
+</script>
+</body>
+</html>
